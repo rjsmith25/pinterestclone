@@ -1,0 +1,26 @@
+<section id="CreatePin">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-6 col-xs-offset-3">
+                <div ng-show = "vm.isCreated === true" class="alert alert-success" role="alert">Pin was Created...</div>   
+                <div ng-show="vm.isCreated === false" class="alert alert-danger" role="alert">Pin was not able to be created : {{vm.error}}</div>
+                <h2 class="text-xs-center">Create New Pins</h2>
+                <form ng-submit='vm.createpin()'>
+                  <fieldset class="form-group">
+                    <label for="inputTitle">Title</label>
+                    <input ng-model='vm.newPin.title' type="text" class="form-control" id="inputTitle" placeholder="Enter title" required>
+                  </fieldset>
+                  <fieldset class="form-group">
+                    <label for="inputImg">Image</label>
+                    <input ng-model='vm.newPin.image' type="url" class="form-control" id="inputImg" placeholder="Enter image url...." required>
+                  </fieldset>
+                  <fieldset class="form-group">
+                    <label for="InputDesc">Description</label>
+                    <textarea ng-model='vm.newPin.description' class="form-control" id="InputDesc" rows="3" placeholder="add a description char limit 140" maxlength="140" required></textarea>
+                  </fieldset>
+                  <button type="submit" class="btn btn-primary">Create</button>
+              </form>
+           </div>
+          </div>
+        </div>
+</section>

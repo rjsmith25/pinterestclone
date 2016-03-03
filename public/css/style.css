@@ -1,0 +1,41 @@
+@import url(https://fonts.googleapis.com/css?family=Old+Standard+TT:400,700);
+@import url(https://fonts.googleapis.com/css?family=Questrial);
+
+/* defaults */
+body{
+  font-family: 'Questrial', sans-serif;
+  font-size:16px;
+  background-color:#ffffff;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: 'Old Standard TT', serif;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active{
+    text-decoration: none;
+}
+
+
+/* Home */
+.recent-title{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+/* Registration and Login */
+
+#Registration,
+#Login{
+	margin-top: 100px;
+}
+
+/* Create Pins */
+
+#CreatePin{
+	margin-top: 80px;
+}
+

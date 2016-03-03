@@ -1,0 +1,19 @@
+<nav class="navbar navbar-full navbar-dark bg-primary">
+    <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+      &#9776;
+    </button> 
+    <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+      <a class="navbar-brand" href="/#">Pin It</a>
+      <ul class="nav navbar-nav  pull-xs-right">
+        <li ng-hide="vm.isLoggedIn" class="nav-item">
+          <a class="btn btn-primary" href="/#register">Sign up</a>
+        </li>
+        <li ng-hide="vm.isLoggedIn" class="nav-item">
+          <a class="btn btn-primary" href="/#login">Log in</a>
+        </li>
+        <li ng-show="vm.isLoggedIn" class="nav-item">
+          <a class="btn btn-primary" href="" ng-click="vm.logout()">Log out</a>
+        </li>
+      </ul>
+    </div>
+</nav>
