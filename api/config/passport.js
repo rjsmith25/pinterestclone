@@ -28,7 +28,11 @@ passport.use(new LocalStrategy({
  }
 ))
 
-/*passport.use(new TwitterStrategy({},
+/*passport.use(new TwitterStrategy({
+	consumerKey:"some secret",
+	consumerSecret:"another secret",
+	callbackURL:""
+},
 	function(){
 
 
