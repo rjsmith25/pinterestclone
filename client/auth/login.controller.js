@@ -4,9 +4,9 @@
 		.module('app.auth')
 		.controller('loginController',loginController);
 
-		loginController.$inject = [];
+		loginController.$inject = ['$location','authentication'];
 
-		function loginController(){
+		function loginController($location,authentication){
                 var vm = this;
 
                 vm.user = {

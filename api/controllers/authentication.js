@@ -64,7 +64,28 @@ function localLogin(req, res) {
 
 };
 
+function twitterLogin(req,res){
+    passport.authenticate('twitter', function(err, user, info){
+    var token;
+
+    if (err) {
+      sendJsonResponse(res, 404, err);
+      return;
+    }
+
+    if(user){
+      token = user.generateJwt('twitter');
+      sendJsonResponse(res, 200, {
+        "token" : token
+      });
+    } else {
+      sendJsonResponse(res, 401, info);
+    }
+  })(req, res);
+}
+
 module.exports = {
 	register:register,
-	localLogin:localLogin
+	localLogin:localLogin,
+  twitterLogin:twitterLogin
 }

@@ -15,8 +15,21 @@
 	 	 	$routeProvider.when('/createpin',{
 	 	 		templateUrl:'/pinboard/createpin.html',
 				controller:'createpinController',
-				controllerAs:'vm'
+				controllerAs:'vm',
+				resolve:{user:resolveUser}
 	 	 	})
+	 	 }
+
+	 	 resolveUser.$inject = ['authentication','$q'];
+
+	 	 function resolveUser(authentication,$q){
+	 	 	var deferred = $q.defer();
+	 	 	if(authentication.isLoggedIn()){
+	 	 		deferred.resolve(true);
+	 	 	}else{
+	 	 		deferred.reject('Authorization Required');
+	 	 	}
+	 	 	return deferred.promise;
 	 	 }
 	 	 
 })()

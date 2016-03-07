@@ -3,7 +3,7 @@ var LocalStrategy = require('passport-local');
 var TwitterStrategy = require('passport-twitter').Strategy;
 var User = require('mongoose').model('User');
 
-// local strategy standard email and password
+// implement local strategy
 passport.use(new LocalStrategy({
 	usernameField:'email'
 },
@@ -28,17 +28,38 @@ passport.use(new LocalStrategy({
  }
 ))
 
-/*passport.use(new TwitterStrategy({
-	consumerKey:"some secret",
-	consumerSecret:"another secret",
-	callbackURL:""
+// implement twitter strategy
+passport.use(new TwitterStrategy({
+	consumerKey:process.env.TWITTER_CONSUMER_KEY,
+	consumerSecret:process.env.TWITTER_CONSUMER_SECRET,
+	callbackURL:"https://pinitx.herokuapp.com/createpin"
 },
-	function(){
+	function(token, tokenSecret, profile, done){
+		User.findOne({'twitter.profile_id':profile.id},function(err,user){
+			if(err){
+				return done(err);
+			}
+			if(user){
+				return done(null,user);
+			}
 
+			var twitterUser = new User();
+
+			twitterUser.twitter.profile_id = profile.id;
+			twitterUser.twitter.name = profile.displayName;
+  			twitterUser.twitter.email = profile.emails[0].value;
+
+  			twitterUser.save(function(err){
+  				if(err){
+  					throw err;
+  				}
+  				return done(null,twitterUser);
+  			})
+
+		})
 
 	}
-
-))*/
+))
 
 
 

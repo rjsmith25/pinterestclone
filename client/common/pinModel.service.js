@@ -7,11 +7,15 @@
 		pinModel.$inject = [];
 
 		function pinModel(){
+
+			function model(){
+				this.title=''
+				this.image=''
+				this.description=''
+			}
+
 			return {
-				title:'',
-	 	 		image:'',
-				description:'',
-				_creator:''
+				model:model
 			}
 		} 
 })()

@@ -44,6 +44,20 @@
 					return deferred.promise;
 			}
 
+			function twitterLogin(){
+				var deferred = $q.defer();
+				return $http.get('/twitterLogin')
+					.then(function(response){
+						saveToken(response.data.token);
+						deferred.resolve(response.data);
+					})
+					.catch(function(err){
+						console.log(err);
+						deferred.reject(err);
+					})
+					return deferred.promise;
+			}
+
 			function isLoggedIn(){
 				var token = getToken();
 
@@ -69,6 +83,7 @@
 			function logout(){
 				$window.localStorage.removeItem('pin-token');
 			}
+			
 
 			return {
 				saveToken:saveToken,

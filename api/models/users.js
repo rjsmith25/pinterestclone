@@ -17,6 +17,7 @@ var userSchema = new mongoose.Schema({
 		salt:String
 	},
 	twitter:{
+		profile_id:String,
 		name:String,
 		email:String
 	}
@@ -40,6 +41,8 @@ userSchema.methods.generateJwt = function(userType){
 		_id:this[userType]._id,
 		email:this[userType].email,
 		name:this[userType].name,
+		emailType:userType + '.email',
+		userType:userType,
 		exp:parseInt(expire.getTime() / 1000)
 	},process.env.JWT_SECRET);
 };

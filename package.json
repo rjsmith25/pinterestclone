@@ -23,7 +23,6 @@
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "request": "^2.69.0",
-    "sharp": "^0.13.0",
     "shortid": "^2.2.4"
   }
 }

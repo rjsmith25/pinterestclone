@@ -4,7 +4,8 @@ var pinSchema = new mongoose.Schema({
 	image:String,
 	title:String,
 	description:String,
-	_creator:String
+	author:String,
+	uid:String
 })
 
 mongoose.model('Pin',pinSchema);

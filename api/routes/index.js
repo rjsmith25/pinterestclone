@@ -11,10 +11,11 @@ var authCtrl = require('../controllers/authentication');
 /*pin routes*/
 router.get('/pins',pinsCtrl.getPins);
 router.get('/uploadImage',pinsCtrl.uploadImage)
-router.post('/pins',pinsCtrl.createPin);
+router.post('/pins',auth,pinsCtrl.createPin);
 
 /*authentication routes*/
 router.post('/register',authCtrl.register);
 router.post('/localLogin',authCtrl.localLogin);
+router.get('/twitterLogin',authCtrl.twitterLogin)
 
 module.exports = router;

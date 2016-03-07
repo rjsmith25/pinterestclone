@@ -4,13 +4,17 @@
 		.module('app.common')
 		.factory('pinsService',pinsService)
 
-		pinsService.$inject = ['$http'];
+		pinsService.$inject = ['$http','authentication'];
 
-		function pinsService($http){
+		function pinsService($http,authentication){
 			
 			//upload pin image
 			function uploadImage(url){
-				return $http.get('api/uploadImage',{params: {url:url}});
+				return $http.get('api/uploadImage',{params: {url:url}},{
+					headers:{
+						Authorization:'Bearer ' + authentication.getToken()
+					}
+				});
 			}
 
 			// get pins
@@ -20,7 +24,11 @@
 
 			// create new pin
 			function createPin(data){
-				return $http.post('/api/pins',data);
+				return $http.post('/api/pins',data,{
+					headers:{
+						Authorization:'Bearer ' + authentication.getToken()
+					}
+				});
 			}
 
 			return {

@@ -11,6 +11,7 @@
         <li ng-hide="vm.isLoggedIn" class="nav-item">
           <a class="btn btn-primary" href="/#login">Log in</a>
         </li>
+        <li ng-show="vm.isLoggedIn" class="nav-item"><a class="btn btn-primary" href="/#pinboard">{{vm.currentUser.name}}</a></li>
         <li ng-show="vm.isLoggedIn" class="nav-item">
           <a class="btn btn-primary" href="" ng-click="vm.logout()">Log out</a>
         </li>
