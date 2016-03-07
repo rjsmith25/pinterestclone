@@ -1,4 +1,5 @@
 var router = require('express').Router();
+var passport = require('passport');
 var jwt = require('express-jwt');
 var auth = jwt({
 	secret:process.env.JWT_SECRET,
@@ -16,6 +17,10 @@ router.post('/pins',auth,pinsCtrl.createPin);
 /*authentication routes*/
 router.post('/register',authCtrl.register);
 router.post('/localLogin',authCtrl.localLogin);
-router.get('/twitterLogin',authCtrl.twitterLogin)
+router.get('/twitterLogin',passport.authenticate('twitter'))
+router.get('/twitter/callback',passport.authenticate('twitter', {
+    successRedirect : '/createpin',
+    failureRedirect : '/'
+  }));
 
 module.exports = router;

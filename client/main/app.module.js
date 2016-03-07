@@ -13,7 +13,7 @@
 	 	 .config(configFunction)
 	 	 .run(runFunction);
 
-	 	 configFunction.$inject = ['$routeProvider', '$locationProvider'];
+	 	 configFunction.$inject = ['$routeProvider', '$locationProvider','$httpProvider'];
 
 	 	 function configFunction($routeProvider,$locationProvider){
 	 	 	$locationProvider.html5Mode(true);

@@ -31,7 +31,7 @@
                     authentication
                         .twitterLogin()
                         .then(function(response){
-                            $location.path('/createpin')
+                            console.log(response);
                         })
                         .catch(function(err){
                             vm.error = err.statusText;
