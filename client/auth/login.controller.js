@@ -23,8 +23,19 @@
                 			$location.path('/createpin')
                 		})
                 		.catch(function(err){
-                			vm.error = error.statusText;
+                			vm.error = err.statusText;
                 		})
+                }
+
+                vm.twitterLogin = function(){
+                    authentication
+                        .twitterLogin()
+                        .then(function(response){
+                            $location.path('/createpin')
+                        })
+                        .catch(function(err){
+                            vm.error = err.statusText;
+                        })
                 }
 
        }

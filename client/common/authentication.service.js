@@ -46,7 +46,7 @@
 
 			function twitterLogin(){
 				var deferred = $q.defer();
-				return $http.get('/twitterLogin')
+				return $http.get('/api/twitterLogin')
 					.then(function(response){
 						saveToken(response.data.token);
 						deferred.resolve(response.data);
@@ -90,6 +90,7 @@
 				getToken:getToken,
 				register:register,
 				localLogin:localLogin,
+				twitterLogin:twitterLogin,
 				currentUser:currentUser,
 				isLoggedIn:isLoggedIn,
 				logout:logout
