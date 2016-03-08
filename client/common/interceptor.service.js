@@ -2,33 +2,22 @@
 	'use strict'
 	angular
 		.module('app.common')
-		.provider('twitterInterceptor',twitterInterceptor)
+		.provider('redirectInterceptor',redirectInterceptor)
 
-		
-		function twitterInterceptor(){
-			var redirectUrl;
-	        this.RedirectUrl = function(value) {
-	            redirectUrl = value;
-	        };
-	        this.$get = ['$q', '$location', '$window', function($q, $location, $window) {
-	            return {
-	                response: function(response){
-	                    return response || $q.when(response);
-	                },
-	                responseError: function(rejection) {
-	                    $q.when(rejection.status == 401)
-	                    if (rejection.status === 401) {
-	                        if(redirectUrl) {
-	                            $location.path(redirectUrl);
-	                            var authUrl = $location.absUrl();
-	                            $window.location.href = authUrl;
-	                        }
-	                    } else if (rejection.status === 429) {
-	                        $location.path('/error');
-	                    }
-	                    return $q.reject(rejection);
-	                }
-	            }
-	        }];
+		redirectInterceptor.$inject = ['$q', '$injector', 'auth', 'store', '$location'];
+
+		function redirectInterceptor($q, $injector, auth, store, $location){
+			return {
+				responseError: function(rejection) {
+
+				  if (rejection.status === 401) {
+				    auth.signout();
+				    store.remove('profile');
+				    store.remove('token');
+				    $location.path('/')
+				  }
+				  return $q.reject(rejection);
+				}
+			}
 		}
 })()

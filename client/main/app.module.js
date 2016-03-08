@@ -4,6 +4,9 @@
 	 	 .module('app',[
 	 	    /*third party modules*/
 			'ngRoute',
+			'auth0',
+			'angular-storage',
+			'angular-jwt'
 			/*my modules*/
 			'app.common',
 			'app.auth',
@@ -13,23 +16,43 @@
 	 	 .config(configFunction)
 	 	 .run(runFunction);
 
-	 	 configFunction.$inject = ['$routeProvider', '$locationProvider','$httpProvider'];
+	 	 configFunction.$inject = ['authProvider','$routeProvider', '$locationProvider','$httpProvider','jwtInterceptorProvider','redirectInterceptorProvider'];
 
-	 	 function configFunction($routeProvider,$locationProvider){
+	 	 function configFunction(authProvider,$routeProvider,$locationProvider,$httpProvider,jwtInterceptorProvider,redirectInterceptorProvider){
+	 	 	authProvider.init({
+    			domain: 'mywebapp.auth0.com',
+    			clientID: 'gkpoo1A5WB4XwiUT2e4bdJRFI0QXqUEA'
+  			});
 	 	 	$locationProvider.html5Mode(true);
 			$routeProvider.otherwise({
 				redirectTo:'/'
 			})
+
+			jwtInterceptorProvider.tokenGetter = function(store){
+				return store.get('token');
+			}
+
+			$httpProvider.interceptors.push('jwtInterceptor');
+
+			$httpProvider.interceptors.push('redirectInterceptor');
+
 	 	 }
 
-	 	 runFunction.$inject = ['$rootScope','$location'];
+	 	 runFunction.$inject = ['$rootScope','auth', 'store', 'jwtHelper', '$location'];
 
-	 	 function runFunction($rootScope,$location){
-	 	 	$rootScope.$on('$routeChangeError',function(event,next,previous,error){
-	 	 		if(error === 'Authorization Required'){
-	 	 			$location.path('/login');
-	 	 		}
-	 	 	})
+	 	 function runFunction($rootScope,auth,store,jwtHelper,$location){
+	 	 	$rootScope.$on('$locationChangeStart', function() {
+				var token = store.get('token');
+				if (token) {
+				  if (!jwtHelper.isTokenExpired(token)) {
+				    if (!auth.isAuthenticated) {
+				      auth.authenticate(store.get('profile'), token);
+				    }
+				  }
+				}
+				else {
+				  $location.path('/');
+				}
 	 	 }
 
 })()

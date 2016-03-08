@@ -5,14 +5,14 @@
     <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
       <a class="navbar-brand" href="/#">Pin It</a>
       <ul class="nav navbar-nav  pull-xs-right">
-        <li ng-hide="vm.isLoggedIn" class="nav-item">
+        <li ng-hide="vm.auth.isAuthenticated" class="nav-item">
           <a class="btn btn-primary" href="/#register">Sign up</a>
         </li>
-        <li ng-hide="vm.isLoggedIn" class="nav-item">
-          <a class="btn btn-primary" href="/#login">Log in</a>
+        <li ng-hide="vm.auth.isAuthenticated" class="nav-item">
+          <a class="btn btn-primary" href="" ng-click="vm.login()">Log in</a>
         </li>
-        <li ng-show="vm.isLoggedIn" class="nav-item"><a class="btn btn-primary" href="/#pinboard">{{vm.currentUser.name}}</a></li>
-        <li ng-show="vm.isLoggedIn" class="nav-item">
+        <li ng-show="vm.auth.isAuthenticated" class="nav-item"><a class="btn btn-primary" href="/#pinboard"></a></li>
+        <li ng-show="vm.auth.isAuthenticated" class="nav-item">
           <a class="btn btn-primary" href="" ng-click="vm.logout()">Log out</a>
         </li>
       </ul>

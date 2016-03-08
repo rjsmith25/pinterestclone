@@ -46,4 +46,3 @@ process.on('SIGTERM', function() {
 });
 
 require('./pins');
-require('./users');

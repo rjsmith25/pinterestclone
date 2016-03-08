@@ -3,14 +3,16 @@
   <head>
     <base href="/" />
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="author" content="">
     <title>PinIt</title> 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"  rel="stylesheet" >
-    <link href="/css/style.css" rel="stylesheet">  
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"  rel="stylesheet" >
+    <link href="/css/style.css" rel="stylesheet">
+    <!-- Auth0 Lock script and AngularJS module -->
+    <script src="//cdn.auth0.com/js/lock-8.2.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
   </head>
   <body>
     
@@ -28,6 +30,9 @@
 
    <!-- third party module -->
    <script src="/lib/angular-route.min.js"></script>
+   <script type="text/javascript" src="//cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js"></script>
+<script type="text/javascript" src="//cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js"></script>
+  <script src="//cdn.auth0.com/w2/auth0-angular-4.js"> </script>
     
    <!--  common module -->
    <script src="/common/common.module.js"></script>

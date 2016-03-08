@@ -3,7 +3,6 @@ var fs = require('fs');
 var request = require('request');
 var mongoose = require('mongoose');
 var Pin = mongoose.model('Pin');
-var User = mongoose.model('User');
 
 function sendJsonResponse(res,status,content){
 	res.status(status);
@@ -57,7 +56,7 @@ function uploadImage(req,res){
 	})
 }
 
-function getUser(req,res,callback){
+/*function getUser(req,res,callback){
 	var search = {}
 	if(req.payload.email && req.payload.emailType){
 		search[req.payload.emailType] = req.payload.email;
@@ -81,7 +80,7 @@ function getUser(req,res,callback){
 		})
 		return;
 	}
-}
+}*/
 
 function getPins(req,res){
 	Pin.find({},function(err,pin){
@@ -94,7 +93,7 @@ function getPins(req,res){
 	})
 }
 
-function createPin(req,res){
+/*function createPin(req,res){
 
 	getUser(req,res,function(req,res,userInfo,userType){
 		Pin.create({
@@ -112,11 +111,9 @@ function createPin(req,res){
 	 	})
 	})
 	
-}
+}*/
 
 
 module.exports = {
 	uploadImage:uploadImage,
-	getPins:getPins,
-	createPin:createPin
 }

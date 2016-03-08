@@ -4,10 +4,9 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var passport = require('passport');
+var cors = require('cors');
 
 require('./api/models/db');
-require('./api/config/passport');
 var apiRoute = require('./api/routes/index');
 
 
@@ -20,8 +19,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'client')));
 app.use(express.static(path.join(__dirname, 'server')));
-
-app.use(passport.initialize());
+app.use(cors());
 
 app.use('/api', apiRoute);
 

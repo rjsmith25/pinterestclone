@@ -13,24 +13,29 @@
 			}
 		}
 
-		navbarController.$inject = ['$rootScope','$location','authentication'];
+		navbarController.$inject = ['auth','store','$location'];
 		
-		function navbarController($rootScope,$location,authentication){
+		function navbarController(auth,store,$location){
 			var vm = this;
+			vm.auth = auth;
 
-			vm.isLoggedIn = authentication.isLoggedIn();
-			vm.currentUser = authentication.currentUser();
-
-			vm.logout = function(){
-				authentication.logout();
-				$location.path('/')
+			vm.login = function(){
+				auth.signin({},function(profile,token){
+					store.set('profile',profile);
+					store.set('token',token);
+					$location.path('/createpin')
+				},function(error){
+					console.log(error);
+				})
 			}
 
-			$rootScope.$on('$routeChangeSuccess',function(next,current){
-				vm.isLoggedIn = authentication.isLoggedIn();
-				vm.currentUser = authentication.currentUser();
-			})
+			vm.logout = function(){
+				auth.signout();
+				store.remove('profile');
+				store.remove('token');
+				$location.path('/');
+			}
 				
 		}
 			
-})()
+})();
