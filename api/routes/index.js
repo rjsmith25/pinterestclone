@@ -8,8 +8,11 @@ var auth = jwt({
 var pinsCtrl = require('../controllers/pins');
 
 /*pin routes*/
-
-router.get('/uploadImage',pinsCtrl.uploadImage)
+router.get('/uploadImage',auth,pinsCtrl.uploadImage);
+router.get('/pins',pinsCtrl.getPins);
+router.get('/pins/user/:userid',pinsCtrl.getPinsByUserId);
+router.post('/pins',auth,pinsCtrl.createPin);
+router.delete('/pins/:pinid',auth,pinsCtrl.deletePin);
 
 
 module.exports = router;

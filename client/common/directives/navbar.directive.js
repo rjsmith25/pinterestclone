@@ -13,17 +13,16 @@
 			}
 		}
 
-		navbarController.$inject = ['auth','store','$location'];
+		navbarController.$inject = ['auth', 'store', '$location'];
 		
 		function navbarController(auth,store,$location){
 			var vm = this;
 			vm.auth = auth;
-
 			vm.login = function(){
 				auth.signin({},function(profile,token){
 					store.set('profile',profile);
 					store.set('token',token);
-					$location.path('/createpin')
+					$location.path('/createpin');
 				},function(error){
 					console.log(error);
 				})
@@ -31,11 +30,10 @@
 
 			vm.logout = function(){
 				auth.signout();
-				store.remove('profile');
-				store.remove('token');
+				store.remove('profile')
+				store.remove('token')
 				$location.path('/');
 			}
-				
 		}
 			
 })();

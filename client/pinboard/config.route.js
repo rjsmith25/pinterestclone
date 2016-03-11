@@ -10,26 +10,21 @@
 	 	 	$routeProvider.when('/pinboard',{
 	 	 		templateUrl:'/pinboard/pinboard.html',
 				controller:'pinboardController',
-				controllerAs:'vm'
+				controllerAs:'vm',
+				requiresLogin: true
 	 	 	})
 	 	 	$routeProvider.when('/createpin',{
 	 	 		templateUrl:'/pinboard/createpin.html',
 				controller:'createpinController',
 				controllerAs:'vm',
-				resolve:{user:resolveUser}
+				requiresLogin: true
+	 	 	})
+	 	 	$routeProvider.when('/user/:username/id/:userid',{
+	 	 		templateUrl:'/pinboard/user.html',
+				controller:'userController',
+				controllerAs:'vm'
+
 	 	 	})
 	 	 }
-
-	 	 resolveUser.$inject = ['authentication','$q'];
-
-	 	 function resolveUser(authentication,$q){
-	 	 	var deferred = $q.defer();
-	 	 	if(authentication.isLoggedIn()){
-	 	 		deferred.resolve(true);
-	 	 	}else{
-	 	 		deferred.reject('Authorization Required');
-	 	 	}
-	 	 	return deferred.promise;
-	 	 }
-	 	 
+ 
 })()

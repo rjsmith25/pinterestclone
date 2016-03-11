@@ -4,20 +4,23 @@
 		.module('app.common')
 		.provider('redirectInterceptor',redirectInterceptor)
 
-		redirectInterceptor.$inject = ['$q', '$injector', 'auth', 'store', '$location'];
+		function redirectInterceptor(){
 
-		function redirectInterceptor($q, $injector, auth, store, $location){
-			return {
-				responseError: function(rejection) {
+			this.$get = ['$q', 'auth', 'store', '$location',function($q, auth,store,$location){
 
-				  if (rejection.status === 401) {
-				    auth.signout();
-				    store.remove('profile');
-				    store.remove('token');
-				    $location.path('/')
-				  }
-				  return $q.reject(rejection);
+				return {
+					responseError: function(rejection) {
+
+					  if (rejection.status === 401) {
+					    auth.signout();
+					    store.remove('profile');
+					    store.remove('token');
+					    $location.path('/')
+					  }
+					  return $q.reject(rejection);
+					}
 				}
-			}
+			
+			}]
 		}
 })()

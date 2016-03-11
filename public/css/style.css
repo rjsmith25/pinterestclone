@@ -19,11 +19,16 @@ a:active{
     text-decoration: none;
 }
 
-
-/* Home */
-.recent-title{
+.recent-title,
+.my-pin-title{
 	margin-top: 15px;
 	margin-bottom: 15px;
+}
+
+/* Home */
+
+.pin-author{
+	cursor: pointer;
 }
 
 /* Registration and Login */
@@ -38,4 +43,6 @@ a:active{
 #CreatePin{
 	margin-top: 80px;
 }
+
+
 

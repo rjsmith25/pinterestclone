@@ -9,6 +9,11 @@ function sendJsonResponse(res,status,content){
 	res.json(content);
 }
 
+function deleteImageFile(img){
+	fs.unlinkSync('server'+img);
+	console.log('image deleted from file');
+}
+
 function uploadImage(req,res){
 	var filename;
 	var maxLength = 10
@@ -56,32 +61,6 @@ function uploadImage(req,res){
 	})
 }
 
-/*function getUser(req,res,callback){
-	var search = {}
-	if(req.payload.email && req.payload.emailType){
-		search[req.payload.emailType] = req.payload.email;
-		User
-			.findOne(search)
-			.exec(function(err,user){
-				if(err){
-					sendJsonResponse(res,404,err);
-					return;
-				}else if(!user){
-					sendJsonResponse(res,404,{
-						"message":"User not found"
-					})
-					return;
-				}
-				callback(req,res,user,req.payload.userType);
-			});
-	}else{
-		sendJsonResponse(res,404,{
-			"message":"User not found"
-		})
-		return;
-	}
-}*/
-
 function getPins(req,res){
 	Pin.find({},function(err,pin){
 		if(err){
@@ -93,15 +72,30 @@ function getPins(req,res){
 	})
 }
 
-/*function createPin(req,res){
+function getPinsByUserId(req,res){
+	if(req.params && req.params.userid){
+		Pin.find({uid:req.params.userid},function(err,pin){
+			if(err){
+				sendJsonResponse(res,404,err);
+			}else{
+				sendJsonResponse(res,200,pin);
+			}
+		})
+	} else{
+		sendJsonResponse(res,404,{
+			"message":"not found, userid require"
+		})
+	}
 
-	getUser(req,res,function(req,res,userInfo,userType){
-		Pin.create({
+}
+
+function createPin(req,res){
+ 	Pin.create({
 		 	image:req.body.image,
 			title:req.body.title,
 		 	description:req.body.description,
-			author:userInfo[userType].name,
-			uid:userInfo._id
+			author:req.body.author,
+			uid:req.body.uid
 		 },function(err,pin){
 		 	if(err){
 		 		sendJsonResponse(res,400,err);
@@ -109,11 +103,36 @@ function getPins(req,res){
 		 		sendJsonResponse(res,201,pin);
 		 	}
 	 	})
-	})
-	
-}*/
+}
+
+function deletePin(req,res){
+	if(req.params && req.params.pinid){
+		Pin
+			.findById(req.params.pinid)
+			.exec(function(err,pin){
+				if(err){
+					sendJsonResponse(res,404,err);
+					return;
+				}
+				var img = pin.image;
+				Pin.remove({_id:req.params.pinid},function(err){
+					if(err){
+						sendJsonResponse(res,404,err);
+					} else{
+						deleteImageFile(img);
+						sendJsonResponse(res,204,null);
+					}
+				})
+			})
+
+	}
+}
 
 
 module.exports = {
 	uploadImage:uploadImage,
+	createPin:createPin,
+	getPins:getPins,
+	getPinsByUserId:getPinsByUserId,
+	deletePin:deletePin
 }

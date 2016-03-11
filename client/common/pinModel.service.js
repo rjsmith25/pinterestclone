@@ -12,6 +12,8 @@
 				this.title=''
 				this.image=''
 				this.description=''
+				this.author='',
+				this.uid=''
 			}
 
 			return {

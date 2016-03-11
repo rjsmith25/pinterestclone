@@ -6,10 +6,9 @@
 			'ngRoute',
 			'auth0',
 			'angular-storage',
-			'angular-jwt'
+			'angular-jwt',
 			/*my modules*/
 			'app.common',
-			'app.auth',
 			'app.home',
 			'app.pinboard'
 	 	 ])
@@ -21,7 +20,8 @@
 	 	 function configFunction(authProvider,$routeProvider,$locationProvider,$httpProvider,jwtInterceptorProvider,redirectInterceptorProvider){
 	 	 	authProvider.init({
     			domain: 'mywebapp.auth0.com',
-    			clientID: 'gkpoo1A5WB4XwiUT2e4bdJRFI0QXqUEA'
+    			clientID: 'gkpoo1A5WB4XwiUT2e4bdJRFI0QXqUEA',
+    			loginUrl: '/'
   			});
 	 	 	$locationProvider.html5Mode(true);
 			$routeProvider.otherwise({
@@ -41,6 +41,7 @@
 	 	 runFunction.$inject = ['$rootScope','auth', 'store', 'jwtHelper', '$location'];
 
 	 	 function runFunction($rootScope,auth,store,jwtHelper,$location){
+	 	 	auth.hookEvents();
 	 	 	$rootScope.$on('$locationChangeStart', function() {
 				var token = store.get('token');
 				if (token) {
@@ -50,9 +51,7 @@
 				    }
 				  }
 				}
-				else {
-				  $location.path('/');
-				}
+		  	});
 	 	 }
 
 })()
