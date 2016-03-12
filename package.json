@@ -20,6 +20,6 @@
     "mongoose": "^4.4.4",
     "morgan": "~1.6.1",
     "request": "^2.69.0",
-    "shortid": "^2.2.4",
+    "shortid": "^2.2.4"
   }
 }
