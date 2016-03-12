@@ -26,7 +26,6 @@
 	 	 					return pinsService.createPin(vm.newPin);
 	 	 				})
 	 	 				.then(function(response){
-	 	 					console.log(response);
 	 	 					vm.newPin = new pinModel.model;
 	 	 					vm.isCreated = true;
 							$timeout(function(){
@@ -34,7 +33,6 @@
 							},1500)
 	 	 				})
 	 	 				.catch(function(error){
-	 	 					console.log(error);
 	 	 					vm.error = error.statusText;
 	 	 					vm.newPin = new pinModel.model;
 	 	 					vm.isCreated = false;

@@ -15,9 +15,9 @@
 	 	 .config(configFunction)
 	 	 .run(runFunction);
 
-	 	 configFunction.$inject = ['authProvider','$routeProvider', '$locationProvider','$httpProvider','jwtInterceptorProvider','redirectInterceptorProvider'];
+	 	 configFunction.$inject = ['authProvider','$routeProvider', '$locationProvider','$httpProvider','jwtInterceptorProvider'];
 
-	 	 function configFunction(authProvider,$routeProvider,$locationProvider,$httpProvider,jwtInterceptorProvider,redirectInterceptorProvider){
+	 	 function configFunction(authProvider,$routeProvider,$locationProvider,$httpProvider,jwtInterceptorProvider){
 	 	 	authProvider.init({
     			domain: 'mywebapp.auth0.com',
     			clientID: 'gkpoo1A5WB4XwiUT2e4bdJRFI0QXqUEA',
@@ -33,8 +33,6 @@
 			}
 
 			$httpProvider.interceptors.push('jwtInterceptor');
-
-			$httpProvider.interceptors.push('redirectInterceptor');
 
 	 	 }
 
