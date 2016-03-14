@@ -19,8 +19,6 @@
 	 	 			return pinsService.uploadaws(response.data);
 	 	 		})
 	 	 		.then(function(response){
-	 	 			console.log(response);
-
 	 	 			vm.newPin.image_url = response.data.Location;
 	 	 			vm.newPin.image_name = response.data.key;
 	 	 			if(vm.profile.screen_name){
@@ -32,7 +30,6 @@
 					return pinsService.createPin(vm.newPin);
 	 	 		})
 	 	 		.then(function(response){
-	 	 			console.log(response.data);
 	 	 			vm.newPin = new pinModel.model;
 	 				vm.isCreated = true;
 					$timeout(function(){
