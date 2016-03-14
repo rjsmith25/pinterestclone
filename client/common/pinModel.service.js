@@ -9,8 +9,9 @@
 		function pinModel(){
 
 			function model(){
+				this.image_url='',
+				this.image_name='',
 				this.title=''
-				this.image=''
 				this.description=''
 				this.author='',
 				this.uid=''

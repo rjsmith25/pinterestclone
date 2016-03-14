@@ -9,6 +9,7 @@ var pinsCtrl = require('../controllers/pins');
 
 /*pin routes*/
 router.get('/uploadImage',auth,pinsCtrl.uploadImage);
+router.get('/awsupload',auth,pinsCtrl.uploadaws)
 router.get('/pins',pinsCtrl.getPins);
 router.get('/pins/user/:userid',pinsCtrl.getPinsByUserId);
 router.post('/pins',auth,pinsCtrl.createPin);

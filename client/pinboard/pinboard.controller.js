@@ -23,7 +23,6 @@
 	 	 	function getPinById(){
 	 	 		pinsService.getPinsByUserId(vm.profile.user_id)
 	 	 	 	.then(function(response){
-	 	 	 		console.log(response);
 	 	 	 		vm.pins = response.data;
 	 	 	 	})
 	 	 	 	.catch(function(err){

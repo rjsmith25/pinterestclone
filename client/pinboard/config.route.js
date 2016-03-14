@@ -18,6 +18,7 @@
 				controller:'createpinController',
 				controllerAs:'vm',
 				requiresLogin: true
+
 	 	 	})
 	 	 	$routeProvider.when('/user/:username/id/:userid',{
 	 	 		templateUrl:'/pinboard/user.html',
